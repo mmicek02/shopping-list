@@ -17,8 +17,8 @@ $(function() {
     // This block of code allows the user to input a new item into the list.
    $('#js-shopping-list-form').submit(event => {
         const userTextInput = $(event.currentTarget).find('#shopping-list-entry');
-        const newItem = [];
-            newItem.push($(
+        const newItem = []; // This array stores the data the user inputs
+            newItem.push($( // This addes the data the user input into the array created above
             `<li>
                 <span class="shopping-item">${userTextInput.val()}</span>
                 <div class="shopping-item-controls"> 
@@ -30,17 +30,20 @@ $(function() {
                 </button>
                 </div>
             </li>`));
-        $(".shopping-list").append(newItem);
+        // This takes all of the data above and 
+        //allows the new html code to be added to index.html
+        $(".shopping-list").append(newItem); 
+        // Prevents the sumbit button from acting in the default manner
         event.preventDefault();
     });
 
    //This allows for items to be checked off the list
-   $(".shopping-item-toggle").on( "click", function() {
-        $(".shopping-item").closest("span").toggleClass("shopping-item__checked");
+   $(".shopping-list").on("click", ".shopping-item-toggle", function(event) {
+        $(this).closest("li").find(".shopping-item").toggleClass("shopping-item__checked");
     });
 
-    // This allows the user to delete an item from their list
-    $(".shopping-item-delete").on( "click", function( event ) {
-        this.closest( "li" ).remove(); 
+    // This allows the user to delete an item from their list 
+    $(".shopping-list").on( "click", ".shopping-item-delete", function(event) {
+        $(this).closest( "li" ).remove(); 
     });
 });   
